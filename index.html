@@ -1,143 +1,158 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pendaftaran Ekstrakurikuler | SMKN Tengaran</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { theme: { extend: {
-      colors: { night: '#120a2e', panel: '#1d1445', cyan: '#22e6ff', mag: '#ff3dbb', gold: '#ffd23f', lime: '#39ff88' },
-      fontFamily: { pixel: ['"Press Start 2P"', 'monospace'], body: ['"Plus Jakarta Sans"', 'sans-serif'] }
-    } } }
-  </script>
-  <link rel="stylesheet" href="assets/css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pendaftaran Ekstrakurikuler | SMKN Tengaran</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { cream:'#faf8f4', ink:'#241f3d', gold:'#c9a24a', rose:'#c98a7c', teal:'#6ea695', sky:'#7d9bc9', lilac:'#a487b8' },
+  fontFamily: { pixel:['"Press Start 2P"','monospace'], body:['"Plus Jakarta Sans"','sans-serif'] }
+} } }
+</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-night text-white font-body font-medium antialiased grid-bg">
+<body class="bg-cream text-ink font-body antialiased">
 
-  <!-- HUD -->
-  <header class="sticky top-0 z-30 bg-night/95 border-b-4 border-black">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-      <a href="#" class="font-pixel text-[10px] sm:text-xs text-gold leading-relaxed">SMKN<br>TENGARAN</a>
-      <div class="flex items-center gap-3 flex-1 max-w-xs justify-end">
-        <span class="font-pixel text-[9px] text-cyan hidden sm:block">XP</span>
-        <div class="xp-track flex-1"><div id="xpBar" class="xp-fill"></div></div>
-        <span id="xpTxt" class="font-pixel text-[9px] text-lime w-10 text-right">0%</span>
-      </div>
-    </div>
-  </header>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand-lockup" aria-label="SMKN Tengaran">
+      <span class="logo-badge"><img src="https://pbs.twimg.com/profile_images/1387673637642129412/eF5rJHlT_400x400.jpg" alt="Lambang resmi SMKN Tengaran"></span>
+      <span class="brand-copy"><strong>SMKN TENGARAN</strong><small>Ekstrakurikuler sekolah</small></span>
+    </a>
+    <a href="#form" class="header-cta"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>Daftar sekarang</span></a>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <section class="max-w-6xl mx-auto px-5 pt-14 pb-16 grid lg:grid-cols-2 gap-12 items-center">
-    <div class="text-center lg:text-left">
-      <p class="font-pixel text-[10px] sm:text-xs text-mag">SMK BISA! SMK HEBAT!</p>
-      <h1 class="font-pixel text-3xl sm:text-5xl leading-[1.5] mt-6 text-gold title-glow">PILIH<br>KARAKTERMU</h1>
-      <p class="mt-6 text-slate-300 text-lg max-w-lg mx-auto lg:mx-0">SMKN Tengaran punya 15 ekstrakurikuler, mulai dari baris-berbaris sampai menari. Baca dulu kegiatan dan skill yang kamu dapat, lalu pilih yang paling cocok.</p>
-      <a href="#pilih" class="btn-game bg-lime text-black mt-9 px-8 py-4"><span class="blink">&#9654;</span> PRESS START</a>
+<!-- HERO -->
+<section class="relative overflow-hidden sky-bg border-b border-[#ece4d2]">
+  <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+  <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+  <div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="pcloud" style="top:14%;left:6%;--s:.9" aria-hidden="true"></div>
+  <div class="pcloud" style="top:10%;right:8%;--s:1.15" aria-hidden="true"></div>
+  <div class="pcloud" style="top:46%;left:64%;--s:.7" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true">
+    <span class="floater" style="top:58%;left:8%;--dur:6s;--dly:0s">&#11088;</span>
+    <span class="floater" style="top:66%;right:10%;--dur:7s;--dly:.5s">&#127942;</span>
+  </div>
+  <div class="hero-wrap max-w-5xl mx-auto px-5 pt-16 pb-20 relative z-10 text-center">
+    <p class="badge-pill mx-auto fx-in" style="--d:0s">PENDAFTARAN EKSTRAKURIKULER</p>
+    <div class="hero-character" aria-hidden="true"><span class="character-spark spark-a">✦</span><span class="character-spark spark-b">✦</span><span class="character-body">◉</span><span class="character-shadow"></span></div><h1 class="font-pixel text-2xl sm:text-4xl leading-[1.8] mt-3 pixel-text fx-in" style="--d:.1s">TEMUKAN<br>DUNIAMU</h1>
+    <p class="mt-7 text-ink/80 font-medium text-lg max-w-lg mx-auto fx-in" style="--d:.2s">SMKN Tengaran punya 15 ekstrakurikuler. Jelajahi tiap dunia, baca ceritanya, lalu pilih yang paling cocok denganmu.</p>
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-9 fx-in" style="--d:.3s">
+      <a href="#koleksi" class="btn-8 bg-ink text-white px-7 py-3.5">Jelajahi Ekskul</a>
+      <a href="#form" class="btn-8 bg-white px-7 py-3.5">Langsung Daftar</a>
     </div>
-    <div id="arena" class="cab" style="--c:#ffd23f">
-      <div class="cab-marquee">SMKN TENGARAN</div>
-      <div class="cab-screen">
-        <p class="font-pixel text-[8px] text-white/70 relative z-10">PLAYER SELECT</p>
-        <div id="aEmoji" class="a-emoji" aria-hidden="true"></div>
-        <h3 id="aNama" class="a-nama font-pixel"></h3>
-        <p id="aRumpun" class="text-sm font-bold text-white/90 mt-1"></p>
-        <p class="font-pixel text-[8px] text-gold blink mt-4">INSERT COIN</p>
-      </div>
-      <div class="cab-deck">
-        <button type="button" id="aPrev" class="knob k-red" aria-label="Karakter sebelumnya">&#9664;</button>
-        <button type="button" id="aBtn" class="btn-game bg-gold text-black px-4 py-3 text-[10px]">LIHAT DETAIL</button>
-        <button type="button" id="aNext" class="knob k-cyan" aria-label="Karakter berikutnya">&#9654;</button>
-      </div>
+    <div class="flex flex-wrap justify-center gap-3 mt-12 fx-in" style="--d:.4s">
+      <div class="stat-pill" style="--c:#c9a24a"><b>15</b>Ekstrakurikuler</div>
+      <div class="stat-pill" style="--c:#7d9bc9"><b>5</b>Rumpun kegiatan</div>
+      <div class="stat-pill" style="--c:#c98a7c"><b>1</b>Formulir singkat</div>
     </div>
-  </section>
+  </div>
+  <div class="ground" aria-hidden="true"></div>
+</section>
 
-  <!-- Cara main -->
-  <section class="max-w-6xl mx-auto px-4 pb-16">
-    <h2 class="font-pixel text-lg sm:text-2xl text-center text-lime leading-relaxed">CARA MAIN</h2>
-    <div class="cara grid md:grid-cols-3 gap-5 mt-8">
-      <div class="panel p-5"><p class="font-pixel text-2xl text-gold">1</p><p class="font-bold text-lg mt-3">Pilih karakter</p><p class="text-slate-300 mt-1">Buka kartu ekskul untuk melihat kegiatan, skill, dan siapa yang cocok.</p></div>
-      <div class="panel p-5"><p class="font-pixel text-2xl text-cyan">2</p><p class="font-bold text-lg mt-3">Isi data pemain</p><p class="text-slate-300 mt-1">Lengkapi formulir. Bar XP naik setiap kolom terisi benar.</p></div>
-      <div class="panel p-5"><p class="font-pixel text-2xl text-mag">3</p><p class="font-bold text-lg mt-3">Selesaikan quest</p><p class="text-slate-300 mt-1">Klik mulai petualangan, lalu kamu resmi jadi anggota.</p></div>
-    </div>
-  </section>
+<!-- CARA MAIN -->
+<section class="max-w-6xl mx-auto px-5 py-16">
+  <p class="eyebrow text-center">CARA IKUT</p>
+  <h2 class="font-pixel text-lg sm:text-xl text-center leading-relaxed mt-3">TIGA LANGKAH MUDAH</h2>
+  <div class="grid md:grid-cols-3 gap-5 mt-10">
+    <div class="step-card fx-up" style="--d:0s"><span class="step-no" aria-hidden="true"><i class="fa-solid fa-compass"></i></span><p class="font-bold text-lg mt-4">Jelajahi ekskul</p><p class="text-white/60 mt-1.5">Baca kegiatan dan skill yang kamu dapat di tiap ekskul.</p></div>
+    <div class="step-card fx-up" style="--d:.12s"><span class="step-no" aria-hidden="true"><i class="fa-solid fa-pen-to-square"></i></span><p class="font-bold text-lg mt-4">Isi data diri</p><p class="text-white/60 mt-1.5">Lengkapi formulir. Progres terlihat di bar bawah formulir.</p></div>
+    <div class="step-card fx-up" style="--d:.24s"><span class="step-no" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span><p class="font-bold text-lg mt-4">Kirim &amp; selesai</p><p class="text-white/60 mt-1.5">Kamu resmi terdaftar di ekstrakurikuler pilihanmu.</p></div>
+  </div>
+</section>
 
-  <!-- Karakter -->
-  <section id="pilih" class="max-w-6xl mx-auto px-4 pb-20">
+<!-- KOLEKSI EKSKUL -->
+<section id="koleksi" class="max-w-6xl mx-auto px-5 py-16">
+  <div class="text-center">
+    <p class="eyebrow">LANGKAH 1 DARI 2</p><h2 class="font-pixel text-lg sm:text-xl leading-relaxed mt-3">PILIH EKSTRAKURIKULER</h2><p class="text-ink/60 font-medium mt-3">Pilih kategori, lalu buka kartu untuk melihat detailnya.</p>
+  </div>
+  <div class="filter-bar mt-8"><span class="filter-label">Kategori</span><div id="filter" class="flex flex-wrap justify-center gap-2"></div></div>
+  <div id="ekskulGrid" class="mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+</section>
+
+<!-- FORM -->
+<section id="form" class="border-t border-[#ece4d2] bg-white py-16 px-5">
+  <div class="max-w-xl mx-auto">
     <div class="text-center">
-      <h2 class="font-pixel text-lg sm:text-2xl text-cyan leading-relaxed">CHARACTER SELECT</h2>
-      <p class="mt-3 text-slate-300">Pilih karakter di sebelah kiri, lalu baca penjelasan dan lihat fotonya di panel.</p>
+      <p class="eyebrow">LANGKAH TERAKHIR</p>
+      <h2 class="font-pixel text-lg sm:text-xl leading-relaxed mt-3">FORMULIR PENDAFTARAN</h2>
+      <p class="text-ink/60 font-medium mt-3">Isi data dengan benar. Kolom yang salah akan ditandai merah.</p>
     </div>
-    <div id="filter" class="flex flex-wrap justify-center gap-3 mt-8"></div>
-    <div class="mt-8 grid lg:grid-cols-5 gap-6 items-start">
-      <div id="ekskulGrid" class="lg:col-span-2 grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-3 gap-3"></div>
-      <article id="panel" class="lg:col-span-3 panelx" aria-live="polite"></article>
-    </div>
-  </section>
 
-  <!-- Formulir -->
-  <section id="daftar" class="px-4 pb-24">
-    <div class="max-w-xl mx-auto">
-      <h2 class="font-pixel text-lg sm:text-2xl text-center text-mag leading-relaxed">PLAYER REGISTRATION</h2>
-      <p class="text-center text-slate-300 mt-3">Isi semua kolom untuk mengisi bar XP sampai 100%.</p>
+    <div class="progress-track mt-7"><div id="xpBar" class="progress-fill"></div></div>
+    <p class="text-center text-xs text-ink/50 font-bold mt-2"><span id="xpTxt" class="text-gold font-bold">0%</span> formulir terisi benar</p>
 
-      <form id="formDaftar" novalidate class="panel mt-8 p-5 sm:p-8 space-y-5">
-        <div>
-          <label for="nama" class="lbl">Nama lengkap</label>
-          <input id="nama" name="nama" type="text" autocomplete="name" placeholder="Contoh: Ani Rahmawati" class="input">
-          <p class="error-msg" data-for="nama"></p>
-        </div>
-        <div>
-          <label for="kelas" class="lbl">Kelas</label>
-          <select id="kelas" name="kelas" class="input">
-            <option value="">Pilih kelas</option><option>X</option><option>XI</option><option>XII</option>
-          </select>
-          <p class="error-msg" data-for="kelas"></p>
-        </div>
-        <div>
-          <label for="email" class="lbl">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" class="input">
-          <p class="error-msg" data-for="email"></p>
-        </div>
-        <div>
-          <label for="password" class="lbl">Password</label>
-          <div class="relative">
-            <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 8 karakter" class="input pr-24">
-            <button type="button" class="toggle-pw" data-target="password" aria-label="Tampilkan password">Lihat</button>
-          </div>
-          <p class="error-msg" data-for="password"></p>
-        </div>
-        <div>
-          <label for="konfirmasi" class="lbl">Konfirmasi password</label>
-          <div class="relative">
-            <input id="konfirmasi" name="konfirmasi" type="password" autocomplete="new-password" placeholder="Ketik ulang password" class="input pr-24">
-            <button type="button" class="toggle-pw" data-target="konfirmasi" aria-label="Tampilkan konfirmasi password">Lihat</button>
-          </div>
-          <p class="error-msg" data-for="konfirmasi"></p>
-        </div>
-        <div>
-          <label for="ekskul" class="lbl">Ekstrakurikuler</label>
-          <select id="ekskul" name="ekskul" class="input"></select>
-          <p class="error-msg" data-for="ekskul"></p>
-        </div>
-        <button type="submit" class="btn-game bg-gold text-black w-full py-4 text-[11px] sm:text-xs">MULAI PETUALANGAN</button>
-      </form>
-
-      <div id="sukses" class="hidden panel mt-8 p-6 text-center border-lime" role="status">
-        <p class="font-pixel text-sm sm:text-base text-lime leading-relaxed">QUEST COMPLETE!</p>
-        <p class="font-pixel text-[10px] text-gold mt-3">+100 XP</p>
-        <p id="suksesTeks" class="mt-4 text-slate-200"></p>
+    <form id="formDaftar" novalidate class="panel mt-6 p-6 sm:p-8 space-y-5">
+      <div>
+        <label for="nama" class="lbl">Nama lengkap</label>
+        <input id="nama" name="nama" type="text" autocomplete="name" placeholder="Contoh: Ani Rahmawati" class="input">
+        <p class="error-msg" data-for="nama"></p>
       </div>
+      <div>
+        <label for="kelas" class="lbl">Kelas</label>
+        <select id="kelas" name="kelas" class="input">
+          <option value="">Pilih kelas</option><option>X</option><option>XI</option><option>XII</option>
+        </select>
+        <p class="error-msg" data-for="kelas"></p>
+      </div>
+      <div>
+        <label for="email" class="lbl">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" class="input">
+        <p class="error-msg" data-for="email"></p>
+      </div>
+      <div>
+        <label for="password" class="lbl">Password</label>
+        <div class="relative">
+          <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Minimal 8 karakter" class="input pr-20">
+          <button type="button" class="toggle-pw" data-target="password">Lihat</button>
+        </div>
+        <p class="error-msg" data-for="password"></p>
+      </div>
+      <div>
+        <label for="konfirmasi" class="lbl">Konfirmasi password</label>
+        <div class="relative">
+          <input id="konfirmasi" name="konfirmasi" type="password" autocomplete="new-password" placeholder="Ketik ulang password" class="input pr-20">
+          <button type="button" class="toggle-pw" data-target="konfirmasi">Lihat</button>
+        </div>
+        <p class="error-msg" data-for="konfirmasi"></p>
+      </div>
+      <div>
+        <label for="ekskul" class="lbl">Ekstrakurikuler</label>
+        <select id="ekskul" name="ekskul" class="input"></select>
+        <p class="error-msg" data-for="ekskul"></p>
+      </div>
+      <button type="submit" class="btn-8 bg-ink text-white w-full py-4">Daftar Ekstrakurikuler</button>
+    </form>
+
+    <div id="sukses" class="hidden panel mt-6 p-6 text-center" role="status">
+      <p class="font-pixel text-sm text-mint leading-relaxed">PENDAFTARAN BERHASIL</p>
+      <p id="suksesTeks" class="mt-3 text-ink/80 font-medium"></p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="border-t-4 border-black bg-black/40 text-center text-sm text-slate-400 py-6 px-4">
-    <p>&copy; 2026 SMK Negeri Tengaran, Kabupaten Semarang &middot; Dikerjakan untuk LKPD 6 - PBTGM</p>
-  </footer>
+<footer class="border-t border-[#ece4d2] bg-white text-center text-sm text-ink/50 py-8 px-5">
+  <p>&copy; 2026 SMK Negeri Tengaran, Kabupaten Semarang &middot; Dikerjakan untuk LKPD 6 - PBTGM</p>
+</footer>
 
-  <script src="assets/js/script.js"></script>
+<audio id="bgm" src="audio/bgm.mp3" loop preload="none"></audio>
+<button type="button" id="musicBtn" class="music-btn" aria-pressed="false">&#127925; Musik</button>
+
+<dialog id="detail" class="sheet" aria-label="Detail ekstrakurikuler"></dialog>
+
+<script src="assets/js/script.js"></script>
 </body>
 </html>
+
+
+
+

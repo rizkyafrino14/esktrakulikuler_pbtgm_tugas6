@@ -36,10 +36,10 @@ const EKSKUL = [
     detail: 'Futsal melatih kontrol bola, kecepatan berpikir, dan kerja sama dalam permainan yang cepat.',
     kegiatan: ['Latihan dribbling dan passing', 'Latihan taktik dan posisi', 'Pertandingan persahabatan'],
     skill: ['Kerja tim', 'Kelincahan', 'Strategi'], cocok: 'kamu yang gemar sepak bola dan permainan cepat.' },
-  { nama: 'MTQ', rumpun: 'Keagamaan', emoji: '📖', desc: 'Tilawah, tajwid, dan seni baca Al-Qur\'an.',
-    detail: 'MTQ membina kemampuan membaca Al-Qur\'an dengan tajwid yang benar dan lagu yang indah, termasuk persiapan lomba.',
+  { nama: 'MTQ', rumpun: 'Keagamaan', emoji: '📖', desc: "Tilawah, tajwid, dan seni baca Al-Qur'an.",
+    detail: "MTQ membina kemampuan membaca Al-Qur'an dengan tajwid yang benar dan lagu yang indah, termasuk persiapan lomba.",
     kegiatan: ['Latihan tilawah dan tajwid', 'Latihan lagu (nagham)', 'Persiapan lomba MTQ'],
-    skill: ['Tajwid', 'Seni suara', 'Ketekunan'], cocok: 'kamu yang suka membaca Al-Qur\'an dan ingin ikut lomba.' },
+    skill: ['Tajwid', 'Seni suara', 'Ketekunan'], cocok: "kamu yang suka membaca Al-Qur'an dan ingin ikut lomba." },
   { nama: 'Rebana', rumpun: 'Keagamaan', emoji: '🥁', desc: 'Seni musik islami dan shalawat.',
     detail: 'Rebana memadukan tabuhan dan lantunan shalawat. Grup ini biasa tampil di acara keagamaan sekolah.',
     kegiatan: ['Latihan tabuhan rebana', 'Melantunkan shalawat', 'Tampil di acara sekolah'],
@@ -66,7 +66,7 @@ const EKSKUL = [
 const ARTI = { 'Paskibra': 'Pasukan Pengibar Bendera', 'PMR': 'Palang Merah Remaja', 'MTQ': "Musabaqah Tilawatil Qur'an",
   'Rohis': 'Rohani Islam', 'Padus': 'Paduan Suara' };
 
-const WARNA = { 'Kepemimpinan': '#ff5a6e', 'Bahasa & Media': '#ffd23f', 'Olahraga': '#39ff88', 'Keagamaan': '#22e6ff', 'Seni': '#ff3dbb' };
+const WARNA = { 'Kepemimpinan': '#99151b', 'Bahasa & Media': '#c5222b', 'Olahraga': '#6b7280', 'Keagamaan': '#252a30', 'Seni': '#b04a50' };
 // Statistik karakter per rumpun: [Fisik, Kreatif, Tim]
 const STAT = { 'Kepemimpinan': [4, 2, 5], 'Bahasa & Media': [2, 5, 3], 'Olahraga': [5, 2, 4], 'Keagamaan': [2, 3, 5], 'Seni': [3, 5, 4] };
 const LABEL_STAT = ['Fisik', 'Kreatif', 'Tim'];
@@ -78,26 +78,26 @@ const grid = $('#ekskulGrid');
 const filter = $('#filter');
 const selectEkskul = $('#ekskul');   // dropdown di formulir
 const form = $('#formDaftar');
+const dialog = $('#detail');
 
-// ===== Roster karakter, filter, dropdown =====
-let aktifIdx = 0;
-
+// ===== Kartu, filter, dropdown =====
 function renderKartu(rumpun = 'Semua') {
   const dipilih = selectEkskul.value;
   grid.innerHTML = '';
-  EKSKUL.forEach((e, i) => {
-    if (rumpun !== 'Semua' && e.rumpun !== rumpun) return;
+  let i = 0;
+  EKSKUL.filter(e => rumpun === 'Semua' || e.rumpun === rumpun).forEach(e => {
+    i++;
     const b = document.createElement('button');
     b.type = 'button';
-    b.dataset.i = i;
-    b.className = 'tile' + (i === aktifIdx ? ' lihat' : '') + (e.nama === dipilih ? ' dipilih' : '');
+    b.className = 'card-ekskul' + (e.nama === dipilih ? ' dipilih' : '');
     b.style.setProperty('--c', WARNA[e.rumpun]);
-    b.setAttribute('aria-label', e.nama);
-    b.innerHTML = `<span class="t-emoji" aria-hidden="true">${e.emoji}</span><span class="t-nm">${e.nama}</span>`;
-    b.addEventListener('click', () => {
-      tampilPanel(i);
-      if (matchMedia('(max-width: 1023px)').matches) $('#panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    b.style.animationDelay = Math.min(i * 40, 480) + 'ms';
+    b.innerHTML = `<span class="icon" aria-hidden="true">${e.emoji}</span>
+      <span class="nm">${e.nama}</span>
+      <span class="tag">${e.rumpun}</span>
+      <span class="ds">${e.desc}</span>
+      <span class="more">Lihat detail &#8594;</span>`;
+    b.addEventListener('click', () => { bunyiKlik(660); bukaDetail(e); });
     grid.appendChild(b);
   });
 }
@@ -108,7 +108,7 @@ function renderFilter() {
     b.type = 'button';
     b.textContent = r;
     b.className = 'chip' + (i === 0 ? ' aktif' : '');
-    b.style.setProperty('--c', WARNA[r] || '#ffd23f');
+    b.style.setProperty('--c', WARNA[r] || '#0a5cc4');
     b.addEventListener('click', () => {
       filter.querySelectorAll('.chip').forEach(c => c.classList.remove('aktif'));
       b.classList.add('aktif');
@@ -123,34 +123,25 @@ function renderDropdown() {
     EKSKUL.map(e => `<option value="${e.nama}">${e.nama}</option>`).join('');
 }
 
-// ===== Panel detail karakter =====
-function tampilPanel(i) {
-  aktifIdx = i;
-  const e = EKSKUL[i], c = WARNA[e.rumpun], panel = $('#panel');
-  grid.querySelectorAll('.tile').forEach(t => t.classList.toggle('lihat', +t.dataset.i === i));
-  panel.style.setProperty('--c', c);
-  panel.innerHTML = `
-    <div class="p-head">
-      <span class="p-emoji" aria-hidden="true">${e.emoji}</span>
-      <div>
-        <h3 class="font-pixel text-base sm:text-xl leading-snug">${e.nama}</h3>
-        <p class="font-bold mt-1">${e.rumpun}${ARTI[e.nama] ? ' &middot; ' + ARTI[e.nama] : ''}</p>
-      </div>
-    </div>
-    <div class="p-body">
-      <div><p class="sh">APA ITU ${e.nama.toUpperCase()}?</p><p class="text-slate-200">${e.detail}</p></div>
+// ===== Detail karakter (dialog) =====
+function bukaDetail(e) {
+  const c = WARNA[e.rumpun];
+  dialog.innerHTML = `
+    <div class="sheet-head" style="--c:${c}"><span class="emoji-big" aria-hidden="true">${e.emoji}</span>
+      <div><h3 class="font-pixel text-sm leading-relaxed">${e.nama}</h3><p class="font-bold mt-1">${e.rumpun}${ARTI[e.nama] ? ' &middot; ' + ARTI[e.nama] : ''}</p></div></div>
+    <div class="sheet-body" style="--c:${c}">
+      <p class="text-ink/80">${e.detail}</p>
       <div><p class="sh">FOTO DOKUMENTASI</p><div id="galeri" class="grid grid-cols-3 gap-2"></div></div>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div><p class="sh">KEGIATAN</p><ul class="list-disc pl-5 space-y-1 text-slate-200">${e.kegiatan.map(k => `<li>${k}</li>`).join('')}</ul></div>
-        <div><p class="sh">SKILL YANG DIDAPAT</p><div class="flex flex-wrap gap-2">${e.skill.map(s => `<span class="skill">${s}</span>`).join('')}</div></div>
+      <div><p class="sh">KEGIATAN</p><ul class="list-disc pl-5 space-y-1 text-ink/80">${e.kegiatan.map(k => `<li>${k}</li>`).join('')}</ul></div>
+      <div><p class="sh">SKILL YANG DIDAPAT</p><div class="flex flex-wrap gap-2">${e.skill.map(s => `<span class="skill" style="--c:${c}">${s}</span>`).join('')}</div></div>
+      <div><p class="sh">COCOK UNTUK</p><p class="text-ink/80">${e.cocok.charAt(0).toUpperCase() + e.cocok.slice(1)}</p></div>
+      <div class="space-y-2">${statHTML(e.rumpun)}</div>
+      <p class="text-xs text-ink/50">Jadwal latihan dan nama pembina: tanyakan ke pembina ekskul atau lihat pengumuman sekolah.</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button type="button" id="pilihIni" class="btn-3d bg-mgold text-ink px-5 py-3 flex-1 text-[10px]">PILIH INI</button>
+        <button type="button" id="tutup" class="btn-3d bg-white text-ink px-5 py-3 text-[10px]">TUTUP</button>
       </div>
-      <div><p class="sh">COCOK UNTUK</p><p class="text-slate-200">${e.cocok.charAt(0).toUpperCase() + e.cocok.slice(1)}</p></div>
-      <div class="space-y-2 max-w-xs">${statHTML(e.rumpun)}</div>
-      <p class="text-xs text-slate-400">Jadwal latihan dan nama pembina: tanyakan ke pembina ekskul atau lihat pengumuman sekolah.</p>
-      <button type="button" id="pilihIni" class="btn-game bg-gold text-black px-6 py-4 text-[10px] sm:text-xs">DAFTAR KE ${e.nama.toUpperCase()}</button>
     </div>`;
-
-  // Galeri: img/<nama>-1.jpg sampai -3.jpg, placeholder jika belum ada
   const galeri = $('#galeri');
   for (let n = 1; n <= 3; n++) {
     const img = new Image();
@@ -165,50 +156,18 @@ function tampilPanel(i) {
     };
     galeri.appendChild(img);
   }
-  $('#pilihIni').addEventListener('click', () => pilihEkskul(e.nama));
+  $('#pilihIni').addEventListener('click', () => { dialog.close(); pilihEkskul(e.nama); });
+  $('#tutup').addEventListener('click', () => dialog.close());
+  dialog.showModal();
 }
-
-// Dipakai tombol di mesin arcade
-function bukaDetail(e) {
-  tampilPanel(EKSKUL.indexOf(e));
-  $('#pilih').scrollIntoView({ behavior: 'smooth' });
-}
+dialog.addEventListener('click', (ev) => { if (ev.target === dialog) dialog.close(); });
 
 function pilihEkskul(nama) {
   selectEkskul.value = nama;
   validasi('ekskul');
   renderKartu(filter.querySelector('.aktif').textContent);
-  $('#daftar').scrollIntoView({ behavior: 'smooth' });
+  $('#form').scrollIntoView({ behavior: 'smooth' });
   setTimeout(() => $('#nama').focus({ preventScroll: true }), 500);
-}
-
-// ===== Mesin arcade di hero (dijaga agar tidak mengganggu bagian lain) =====
-function initArena() {
-  const arena = $('#arena');
-  if (!arena) return;
-  let idx = 0, timer;
-  const tampil = (i) => {
-    idx = (i + EKSKUL.length) % EKSKUL.length;
-    const e = EKSKUL[idx];
-    arena.style.setProperty('--c', WARNA[e.rumpun]);
-    $('#aNama').textContent = e.nama;
-    $('#aRumpun').textContent = e.rumpun;
-    const em = $('#aEmoji');
-    em.textContent = e.emoji;
-    em.classList.remove('pop'); void em.offsetWidth; em.classList.add('pop');
-  };
-  const putar = () => {
-    clearInterval(timer);
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    timer = setInterval(() => tampil(idx + 1), 3000);
-  };
-  $('#aPrev').addEventListener('click', () => { tampil(idx - 1); putar(); });
-  $('#aNext').addEventListener('click', () => { tampil(idx + 1); putar(); });
-  $('#aBtn').addEventListener('click', () => bukaDetail(EKSKUL[idx]));
-  arena.addEventListener('mouseenter', () => clearInterval(timer));
-  arena.addEventListener('mouseleave', putar);
-  tampil(0);
-  putar();
 }
 
 // ===== Aturan validasi =====
@@ -245,7 +204,6 @@ function validasi(id) {
   return !pesan;
 }
 
-// ===== Validasi real-time =====
 Object.keys(aturan).forEach(id => {
   const el = $('#' + id);
   let disentuh = false;
@@ -281,6 +239,7 @@ form.addEventListener('submit', (event) => {
     `${$('#nama').value.trim()} (kelas ${$('#kelas').value}) resmi bergabung di ekstrakurikuler ${$('#ekskul').value}. Pembina akan menghubungi lewat ${$('#email').value.trim()}.`;
   sukses.classList.remove('hidden');
   sukses.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  bunyiKlik(880, .12);
 
   form.reset();
   form.querySelectorAll('.input').forEach(i => i.classList.remove('is-valid', 'is-invalid'));
@@ -292,5 +251,33 @@ form.addEventListener('submit', (event) => {
 renderDropdown();
 renderFilter();
 renderKartu();
-tampilPanel(0);
-try { initArena(); } catch (err) { console.error('Arena gagal:', err); }
+
+
+// ===== Musik latar (file lagu milik pengguna) =====
+const bgm = $('#bgm');
+const musicBtn = $('#musicBtn');
+let musicOn = false;
+
+if (musicBtn && bgm) {
+  musicBtn.addEventListener('click', () => {
+    musicOn = !musicOn;
+    if (musicOn) {
+      bgm.volume = 0.5;
+      bgm.play().catch(() => { musicOn = false; updateMusicBtn(); });
+    } else {
+      bgm.pause();
+    }
+    updateMusicBtn();
+  });
+
+  bgm.addEventListener('ended', () => { musicOn = false; updateMusicBtn(); });
+
+  function updateMusicBtn() {
+    musicBtn.classList.toggle('on', musicOn);
+    musicBtn.setAttribute('aria-pressed', String(musicOn));
+    musicBtn.innerHTML = musicOn ? '&#128266; Musik' : '&#127925; Musik';
+  }
+}
+
+// Bunyi klik lembut hanya jika musik sedang menyala (dipakai saat kartu dibuka / daftar berhasil)
+function bunyiKlik() { /* nonaktif: memakai lagu sendiri, tidak perlu efek suara sintetis */ }
