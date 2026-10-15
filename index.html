@@ -32,6 +32,7 @@ tailwind.config = { theme: { extend: {
 
 <!-- HERO -->
 <section class="relative overflow-hidden sky-bg border-b border-[#ece4d2]">
+  <div class="hero-slideshow" aria-hidden="true"><img class="hero-slide is-active" src="img/tari-1.jpg" alt=""><img class="hero-slide" src="img/paskibra-2.jpg" alt=""><img class="hero-slide" src="img/jurnalis-1.jpg" alt=""><img class="hero-slide" src="img/pramuka-1.jpg" alt=""></div>
   <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
   <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
   <div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -60,7 +61,7 @@ tailwind.config = { theme: { extend: {
 </section>
 
 <!-- CARA MAIN -->
-<section class="max-w-6xl mx-auto px-5 py-16">
+<section class="steps-section max-w-6xl mx-auto px-5 py-16">
   <p class="eyebrow text-center">CARA IKUT</p>
   <h2 class="font-pixel text-lg sm:text-xl text-center leading-relaxed mt-3">TIGA LANGKAH MUDAH</h2>
   <div class="grid md:grid-cols-3 gap-5 mt-10">
@@ -70,6 +71,20 @@ tailwind.config = { theme: { extend: {
   </div>
 </section>
 
+<!-- MISSION / VISUAL STORY -->
+<section class="mission-section max-w-6xl mx-auto px-5 py-16" aria-labelledby="missionTitle">
+  <div class="mission-copy">
+    <p class="eyebrow">TENTANG EKSTRAKURIKULER</p>
+    <h2 id="missionTitle">Berkembang lewat<br><span>minat, karya, dan tim.</span></h2>
+    <p>Setiap kegiatan dirancang untuk membangun kepercayaan diri, keterampilan, dan pengalaman yang berguna di sekolah maupun dunia kerja.</p>
+    <a href="#koleksi" class="story-link">Lihat semua pilihan <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+  </div>
+  <div class="mission-cards">
+    <article class="mission-card"><img src="img/jepang-1.jpg" alt="Kegiatan ekskul bahasa dan budaya Jepang"><div><span>Bahasa &amp; Media</span><h3>Kenali dunia lebih luas.</h3></div></article>
+    <article class="mission-card"><img src="img/jurnalis-1.jpg" alt="Kegiatan jurnalistik sekolah"><div><span>Jurnalistik</span><h3>Ceritakan karya dan aksi.</h3></div></article>
+    <article class="mission-card"><img src="img/paskibra-1.jpg" alt="Kegiatan Paskibra sekolah"><div><span>Kepemimpinan</span><h3>Tumbuh bersama tim.</h3></div></article>
+  </div>
+</section>
 <!-- KOLEKSI EKSKUL -->
 <section id="koleksi" class="max-w-6xl mx-auto px-5 py-16">
   <div class="text-center">
@@ -152,6 +167,10 @@ tailwind.config = { theme: { extend: {
 <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+
+
+
 
 
 

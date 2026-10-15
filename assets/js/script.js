@@ -92,11 +92,7 @@ function renderKartu(rumpun = 'Semua') {
     b.className = 'card-ekskul' + (e.nama === dipilih ? ' dipilih' : '');
     b.style.setProperty('--c', WARNA[e.rumpun]);
     b.style.animationDelay = Math.min(i * 40, 480) + 'ms';
-    b.innerHTML = `<span class="icon" aria-hidden="true">${e.emoji}</span>
-      <span class="nm">${e.nama}</span>
-      <span class="tag">${e.rumpun}</span>
-      <span class="ds">${e.desc}</span>
-      <span class="more">Lihat detail &#8594;</span>`;
+    b.innerHTML = `<span class="card-photo"><img src="img/${e.nama.toLowerCase()}-1.jpg" alt="Kegiatan ${e.nama}" loading="lazy"><span class="icon" aria-hidden="true">${e.emoji}</span></span>\n      <span class="nm">${e.nama}</span>\n      <span class="tag">${e.rumpun}</span>\n      <span class="ds">${e.desc}</span>\n      <span class="more">Lihat detail &#8594;</span>`;
     b.addEventListener('click', () => { bunyiKlik(660); bukaDetail(e); });
     grid.appendChild(b);
   });
@@ -281,3 +277,16 @@ if (musicBtn && bgm) {
 
 // Bunyi klik lembut hanya jika musik sedang menyala (dipakai saat kartu dibuka / daftar berhasil)
 function bunyiKlik() { /* nonaktif: memakai lagu sendiri, tidak perlu efek suara sintetis */ }
+
+
+
+// ===== Hero slideshow (presentasi visual) =====
+const heroSlides = document.querySelectorAll('.hero-slide');
+if (heroSlides.length > 1) {
+  let heroIndex = 0;
+  window.setInterval(() => {
+    heroSlides[heroIndex].classList.remove('is-active');
+    heroIndex = (heroIndex + 1) % heroSlides.length;
+    heroSlides[heroIndex].classList.add('is-active');
+  }, 5200);
+}
